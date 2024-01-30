@@ -1,0 +1,80 @@
+<계산기 개발 순서>
+1. 계산기 뼈대 만들기 - HTML
+2. 계산기 스타일 적용 - CSS
+3. 버튼 클릭 시 input 태그에 텍스트 보이게 - JavaScript
+4. AC(초기화) 기능 구현 - JavaScript
+5. 계산 기능 구현 - JavaScript
+
+<stylesheet, script태그 작성 위치>
+stylesheet는 <head>태그에, script는 <body>태그 맨 마지막에 작성
+
+<나눗셈, 곱셈 표시를 위한 HTML토큰>
+나눗셈 : &divide;
+곱셈 : &times;
+
+<data-* 속성>
+: HTML 요소에 추가 정보를 엘리멘트에 담아 놓아 저장함
+ex) data-type, data-colums, data-index-number...
+
+=> JavaScript에서 접근
+: dataset객체를 통해 data를 가져옴
+ex) buttons.dataset.type, buttons.dataset.colums, buttons.dataset.indexNumber...
+
+<JavaScript에 태그 가져오기>
+document.querySelector('선택자') => 문서 내의 입력한 선택자와 일치하는 첫 번째 요소 반환
+document.querySelectorAll('선택자') => 문서 내의 입력한 선택자와 일치하는 모든 요소 반환(반환타입: 리스트)
+
+<클릭 이벤트 연결>
+적용 이벤트 대상이 1개 태그라면 HTML 태그에 직접 onclick 이벤트등을 주어 처리 할 수 있겠지만, 대상이 여러 개거나 리스트 형태라면
+JavaScript에서 *EventTarget 인터페이스의 addEventListener() method로 연결하는 것이 효율적
+
+ex) 
+<html>
+<input id='a' value='a'/>
+</html>
+
+<script>
+const el = document.getElementById("a")
+
+-- 1. 간단한 event 추가 방법
+el.addEventListener("click", modifyText, false)
+function modifyText(){
+    const t2 = document.getElementById('a')
+    t2.value = 'b'
+}
+
+-- 2_1. 화살표 함수를 사용한 event 추가 방법
+el.addEventListener("click", () => {modifyText("b");}, false,);
+
+-- 2_2. 함수 호출 대신 내부에 직접 명시
+el.addEventListener("click", () => {
+  console.log('dsd')
+  const t2 = document.getElementById('a')
+  t2.value = 'b'
+}, false,)
+</script>
+
+
+*대상: Element, Document, window...
+
+*EventTarget.addEventListener()로 등록할 수 있는 이벤트 목록
+-. change: 변동이 있을 때 발생
+-. click: 클릭 시 발생
+-. focus: 포커스를 얻었을 때 발생
+-. keydown: 키를 눌렀을 때 발생
+-. keyup: 키에서 손을 땔 때 발생
+-. load: 로드가 완료 되었을 때 발생
+-. mousedown: 마우스를 클릭 했을 때 발생
+-. mouseout: 마우스가 특정 객체 밖으로 나갔을 때 발생
+-. mouseover: 마우스가 특정 객체 위로 올려졌을 때 발생
+-. mousemove: 마우스가 움직였을 때 발생
+-. mouseup: 마우스에서 손을 땔 때 발생
+-. select: option 태그 등에서 선택 시 발생
+
+<>
+순수 JavaScript로 코드 짜는 거 너무 오랜만이라 문법 다 까먹음,,
+JavaScript에서 태그 값 가져오는 방법, 이벤트 처리 하는 방법 다시 배웠다 ! 뉴뉴
+
+https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener#%EC%82%AC%EC%9A%A9_%EC%9D%BC%EB%9E%8C
+https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector
+https://sayyoung.tistory.com/37

@@ -1,51 +1,57 @@
-//1. html 버튼 값 가져오기
 const buttons = document.querySelectorAll('button');
-const operator = document.querySelectorAll('.operator');
-const displayElement = document.querySelector('.input');
-const numBtn = document.querySelectorAll('numBtn');
+const displayElement = document.querySelector('input');
 
-let operatorOn = ''; // 연산자 입력
-let previousNum = ''; //이전 값
-let resentNum = ''; // 최근값
+class Calculator {
+  constructor(displayElement){
+    //input 태그 초기화
+    this.displayElement = displayElement;
+    this.displayContent = '';
+    this.clear()
+  }
 
-//2. 계산 함수
-let calculate = (n1, operator, n2) => {
-   console.log("n1: " + n1 + ", operator: " +  operator + ", n2: " +  n2);
-    let result = 0;
-    switch (operator) {
-      case '+':
-        result = Number(n1) + Number(n2);
-        console.log("결과값: " + result)
-        break;
-      case '-':
-        result = Number(n1) - Number(n2);
-        break;
-      case 'x':
-        result = Number(n1) * Number(n2);
-        break;
-      case '/':
-        result = Number(n1) / Number(n2);
-        break;
+  appendNumber(number){
+    this.displayContent += number
+  }
+
+  appendOperator(operator){
+    this.displayContent += operator
+  }
+
+  updateDisplay(){
+    this.displayElement.value = this.displayContent
+  }
+
+  clear(){
+    this.displayContent = ''
+    this.displayElement.value = 0
+  }
+
+  compute(){
+    this.displayContent = eval(this.displayContent.replace('\u00D7', '*') .replace('\u00F7', '/'))
+  }
+}
+
+const calculator = new Calculator(displayElement)
+
+buttons.forEach(buttons => {
+  buttons.addEventListener('click', () => {
+    //버튼 눌렀을 때 값이 operator인지, ac인지, = 인지 구별
+    switch(buttons.dataset.type){
+      case 'operator':
+        calculator.appendOperator(buttons.innerText)
+        calculator.updateDisplay()
+        break
+      case 'ac':
+        calculator.clear()
+        break
+      case 'equals':
+        calculator.compute()
+        calculator.updateDisplay()
+        break
       default:
-        break;
+        calculator.appendNumber(buttons.innerText)
+        calculator.updateDisplay()
+        break
     }
-    return String(result);
-  };
-
-  //3. 버튼 클릭 될 때 마다 숫자 가져오기
-  //모든 버튼에 이벤트 걸어야 함
-  buttons.forEach((item) => {
-    item.addEventListener('click', (event) => {
-      var action = event.target.className;
-      
-      if(action === 'numBtn'){
-        previousNum = event.target.innerHTML;
-      }else if(action === 'operator'){
-        operatorOn = event.target.innerHTML;
-      }else if(action === 'result'){
-        calculate(previousNum, operator, previousNum);
-      }
-    })
   })
-  calculator();
-
+})

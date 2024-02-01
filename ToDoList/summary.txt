@@ -1,0 +1,103 @@
+<Todo-list 개발>
+1. Todo-List 뼈대 만들기 - HTML
+2. Todo-List 스타일 적용 - CSS
+3. 할일 add, 완료 체크, delete 기능 구현 - JavaScript
+4. 예외처리
+
+<동적으로 element 추가/제거/대체하기>
+-. 추가
+document.createElement(element) : 새 element node를 생성
+document.createTextNode(text) : 새 텍스트 node를 생성한다.
+=> 기존 element에 추가해야 document에 나타남 
+=> element.appendChild(newNode)
+
+-. 속성 추가
+element.setAttribute("속성", "속성명")
+ex) createDiv.setAttribute("class", "myClass")
+createInput.setAttribute("type", "checkbox")
+
+-. 제거
+parent.removeChild(node) : element 의 parent 선택 후 제거 메소드 사용
+
+-. 대체
+element.replaceChild(newNode, oldNode)
+
+<check 박스 check 여부 확인>
+checked 속성 사용
+
+<block element vs inline element>
+span 태그에 width와 height 속성이 적용되지 않아 검색한 결과,
+span 태그는 인라인 요소 => 너비나 높이가 없음
+
+-. 블록(block) 요소
+: 사용 가능한 최대 가로 너비 사용 -> 전체를 사용하기 떄문에 수직으로 쌓임 (한 줄에 한 개만 배치)
+: width, height, margin, padding  속성 적용 가능
+<div>, <table>, <h1>~<h6>, <p> ...
+
+-. 인라인(inline) 요소
+: 사용 가능한 필요한 만큼의 영역 사용 -> 요소들이 수평으로 쌓임 (한 줄에 여러 개 배치)
+: 텍스트가 없으면 브라우저에 안보임
+: 해당 요소의 내용에 맞게 크기가 결정 되므로 width와 height 속성이 적용되지 않음
+: 상하 margin 속성 x / 좌우 margin, padding 속성은 o
+<span>, <a>, <img> ... 
+
+-. 인라인-블록(inline-block) 요소
+: 기본 특성은 인라인이라 수평으로 쌓이지만 블록 요소처럼 사이즈 적용 가능
+: width, height, 상하좌우 margin, padding 사용 가능
+: 사용가능한 필요한 만큼의 영역 사용 -> 컨텐츠 너비 만큼
+<input>, <button> ...
+
+
+<이벤트>
+-. 이벤트(Event)
+: 웹 브라우저가 알려주는 HTML 요소에 대한 사건이 발생 -> 특정 동작 수행
+: 자바스크립트는 비동기식 이벤트
+
+-. 이벤트 등록/제거
+객체.addEvenetListener(이벤트타입, 이벤트리스너)
+객체.removeEventListener(이벤트타입, 이벤트리스너)
+ex) <input type="button" onclick="sendit()" value="확인">
+button: 이벤트 타겟(객체)
+onclick: 이벤트 타입
+sendit(): 이벤트리스너 
+
+-. 이벤트 객체
+: 특정 타입의 이벤트와 관련이 있는 객체 (이벤트 타겟, 이벤트 대상)
+: 해당 타입의 이벤트에 대한 상세 정보 저장하고 있음 => event type, event target 속성을 가짐
+: 이벤트 객체를 이벤트 리스너가 호출할 때 인수로 전달*** 
+=> script.js 40line, checkboxLine 함수에서 전달한 이벤트 객체 (e)는 img 이벤트 객체를 나타냄
+
+-. 이벤트 타입(=이벤트명)
+: 발생한 이벤트의 종류
+
+-. 이벤트 리스너(=이벤트 핸들러)
+: 이벤트가 발생했을 때 처리를 담당하는 함수
+
+-. 이벤트 등록방법
+1. inline: 이벤트를 이벤트 대상의 태그 속성으로 지정
+ex) <input type="button" onclick="alert('Hello World');" value="button />
+<input type="button" onclick="alert('Hello World, 'this.value);" value="button />
+
+2. property listener: 이벤트 대상에 해당하는 객체의 속성으로 이벤트 등록하는 방식
+인라인 방식에 비해 HTML과 JavaScript를 분리할 수 있음
+ex) <input type="button" id="target" value="button" />
+<script>
+    var t = document.getElementById('target');
+    t.onclick = function(){
+        alert('Hello world');
+    }
+</script>
+
+3. addEvenetListener(): 여러 개의 이벤트 핸들러 등록 가능
+<input type="button" id="target" value="button" />
+<script>
+    var t = document.getElementById('target');
+    t.addEventListener('click', function(event){
+        alert('Hello world, '+event.target.value);
+    });
+</script>
+
+<>
+createElement() 사용해서 동적으로 요소 추가하기: https://sjy1218vv.tistory.com/41
+이벤트 리스너: https://coding-yesung.tistory.com/137?category=1142287
+Todolist 참고: https://velog.io/@cheesecookie/JavaScript%EB%A1%9C-%EA%B0%84%EB%8B%A8%ED%95%9C-To-Do-List-%EB%A7%8C%EB%93%A4%EA%B8%B0

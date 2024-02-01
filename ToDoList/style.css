@@ -1,0 +1,55 @@
+body {
+    width: 450px;
+    height: 280px;
+    border: 1px solid #FD8A69;
+    border-radius: 15px;
+    /* background: #FCEADB; */
+}
+
+span {
+    display: inline-block;
+    width: 90%;
+}
+
+.box {
+    padding: 15px;
+}
+
+button {
+    background-color: #fb9649;
+    border-color: #fb9649;
+    border: none;
+    border-radius: 2px;
+    color: white;
+}
+
+input[type="text"]{
+    background-color: transparent; 
+}
+
+input[type="text"] {
+    width: 83%;
+    border: none;
+    border-bottom: 1.5px solid #fb9649;;
+    padding: 0 10px;
+    background-color: transparent;
+}
+
+input:focus {outline:none;}
+
+h2{
+    color: #FD8A69;
+}
+
+#addList{
+    border: thin dashed #fb9649;
+    border-radius: 2px;
+    margin-bottom: 2%;
+}
+
+#trashcanButton{
+    content: url("trashcan.png");
+    width: 15px;
+    height: 15px;
+}
+

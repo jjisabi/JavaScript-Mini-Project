@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>summary.txt 예제코드</title>
+    <style>
+        #bElement1{
+            background: red;
+            width: 200px;
+            height: 10px;
+        }
+        #bElement2{
+            background: orange;
+        }
+        #bElement3{
+            background: yellowgreen;
+        }
+
+        #iElement1{
+            background: red;
+        }
+        #iElement2{
+            background: orange;
+            width: 500px;
+        }
+        #iElement3{
+            background: yellowgreen;
+        }
+
+        input{
+            width: 40px;
+        }
+    </style>
+
+<script>
+    //2. 이벤트 객체
+    window.onload = function(){
+        const btn = document.getElementById("btn")
+        btn.addEventListener("click", clickBtn)
+    }
+
+    function clickBtn(e){
+        console.log("e: " + e)
+        console.log("e.target: " + e.target)
+        console.log("e.target.id: " + e.target.id)
+        console.log("e.target.value: " + e.target.value)
+        console.log("e.type: " + e.type)
+    }
+
+    //3. 이벤트 리스너
+    window.onload = function(){
+        const btn = document.getElementById("eventBtn")
+        btn.addEventListener("click", clickBtn) //event type, event listner
+        btn.addEventListener("mouseover", mouseOverBtn)
+        btn.addEventListener("mouseout", mouseOut)
+    }
+
+    function clickBtn(){
+        document.getElementById("text").innerHTML = "버튼을 클릭했어요!"
+    }
+
+    function mouseOverBtn(){
+        document.getElementById("text").innerHTML = "버튼 위에 커서가 올라갔어요!"
+    }
+
+    function mouseOut(){
+        document.getElementById("text").innerHTML = "버튼 밖으로 커서가 나갔어요!"
+    }
+
+    function delEvent(){
+        const btn = document.getElementById("eventBtn")
+        btn.removeEventListener("click", clickBtn)
+        btn.removeEventListener("mouseover", mouseOverBtn)
+        btn.removeEventListener("mouseout", mouseOut)
+        document.getElementById("text").innerHTML = "이벤트 리스너가 모두 삭제되었어요!"
+    }
+
+
+</script>
+</head>
+<body>
+    <!-- 1. block element vs inline element -->
+    <h2>1. block element vs inline element</h2>
+    <div id="bElement1"></div>
+    <div id="bElement2">block element 2</div>
+    <div id="bElement3">block element 3</div>
+    <br>
+
+    <span id="iElement1"></span>
+    <span id="iElement2">element</span>
+    <span id="iElement3">inline element</span>
+
+    <input>
+    <input>
+    <input>
+
+    <!-- 2. 이벤트 객체 -->
+    <h2>2. 이벤트 객체</h2>
+    <button type="button" id="btn" value="확인">확인</button>
+
+    <!-- 3. 이벤트 리스너 -->
+    <h2>3. 이벤트 리스너</h2>
+    <p>
+        <button id="eventBtn">이벤트 버튼</button>
+        <button id="delBtn" onclick="delEvent()">이벤트 삭제 버튼</button>
+    </p>
+    <p id="text"></p>
+</body>
+</html>
